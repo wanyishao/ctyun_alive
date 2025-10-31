@@ -8,7 +8,7 @@ logger = get_logger(__name__)
 
 
 def key_alive(page):
-    # 默认打开第一台云电脑(修改)
+    # 默认打开第一台云电脑
     if page.ele(".desktopcom-enter", timeout=10):
         logger.info("打开云电脑界面成功！")
         page.ele(".desktopcom-enter").click()
