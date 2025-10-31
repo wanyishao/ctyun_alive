@@ -9,9 +9,9 @@ logger = get_logger(__name__)
 
 def key_alive(page):
     # 默认打开第一台云电脑
-    if page.ele(".desktop-main-entry", timeout=10):
+    if page.ele(".desktopcom-enter", timeout=10):
         logger.info("打开云电脑界面成功！")
-        page.ele(".desktop-main-entry").click()
+        page.ele(".desktopcom-enter").click()
         page.wait(ALIVE_SECOND)
         logger.info("保活成功！")
         return True
@@ -55,7 +55,7 @@ def main():
     page = browser.get_page()
     page.get("https://pc.ctyun.cn")
 
-    if page.ele(".desktop-main-entry", timeout=10):
+    if page.ele(".desktopcom-enter", timeout=10):
         logger.info("已成功登陆！")
         key_alive(page)
     elif page.ele(".account", timeout=10):
