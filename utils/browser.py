@@ -12,6 +12,11 @@ class Browser(object):
         browser_path = "/usr/bin/google-chrome"
         options = ChromiumOptions()
         options.set_paths(browser_path=browser_path)
+        options.set_argument('--window-size=1920,1080')
+        options.set_argument('--disable-gpu')
+        options.set_argument('--no-sandbox')
+        options.set_argument('--disable-dev-shm-usage')
+        options.set_paths(browser_path=browser_path)
         if data_path:
             logger.info(f"使用指定浏览器数据文件夹:{data_path}")
             options.set_user_data_path(data_path)
