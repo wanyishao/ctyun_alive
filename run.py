@@ -25,7 +25,7 @@ def login(page, account,proxy):
         code= get_captcha_code(account,proxy)
         page.ele(".code").input(code)
     page.listen.start('desk.ctyun.cn:8810/api/auth/client/login') 
-    page.ele(".:btn-submit").click()
+    page.ele(".el-button el-button--primary btn-submit btn-submit-pc").click()
     response = page.listen.wait(timeout=5)
     login_info = response._raw_body
     logger.info(f"登录信息: {response._raw_body}")
