@@ -10,13 +10,18 @@ logger = get_logger(__name__)
 def key_alive(page):
     # 默认打开第一台云电脑
     if page.ele(".desktopcom-enter", timeout=10):
-        logger.info("打开云电脑界面成功！")
+        logger.info("打开云电脑界面成功！尝试连接云电脑...")
         page.ele(".desktopcom-enter").click()
-        page.wait(ALIVE_SECOND)
-        logger.info("保活成功！")
-        return True
+        if page.ele(".delay", timeout=30):
+            logger.info("云电脑连接成功 ！开始保活计时...")
+            page.wait(ALIVE_SECOND)
+            logger.info(f"保活时间 {ALIVE_SECOND} 秒结束，保活成功！")
+            return True
+        else:
+            logger.error("云电脑连接超时 ，保活失败！")
+            return False
     else:
-        logger.error("打开云电脑界面失败！")
+        logger.error("未检测到云电脑进入按钮，保活失败！")
         return False
 
 def login(page, account,proxy):
